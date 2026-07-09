@@ -3,210 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bonus Rehberi</title>
 
-<style>
-body {
-  margin:0;
-  font-family:Arial;
-  background:#0b0b0b;
-  color:white;
-}
+<title>Yükleniyor...</title>
+<meta name="description" content="">
 
-/* TOPBAR */
-.topbar {
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-  background:#111;
-  position:sticky;
-  top:0;
-}
-
-.topbar a {
-  background:#0088cc;
-  padding:8px 12px;
-  border-radius:8px;
-  color:white;
-  text-decoration:none;
-}
-
-/* LIVE */
-.live-box {
-  background: linear-gradient(90deg,#00ffd5,#00aaff);
-  padding:10px;
-  text-align:center;
-  font-weight:bold;
-  color:black;
-  border-radius:10px;
-  margin:10px;
-}
-
-/* CARD */
-.container {
-  padding:10px;
-}
-
-.card {
-  position:relative;
-  background:#1a1a1a;
-  margin:15px 0;
-  padding:15px;
-  border-radius:12px;
-  border:1px solid #222;
-  transition:0.3s;
-}
-
-.card:hover {
-  transform:scale(1.02);
-  box-shadow:0 0 15px #00ffd5;
-}
-
-.card img {
-  width:100%;
-  border-radius:10px;
-}
-
-.badge {
-  position:absolute;
-  top:10px;
-  left:10px;
-  background:#ff0055;
-  padding:5px 10px;
-  border-radius:8px;
-  font-size:12px;
-}
-
-.rating {
-  color:#ffd700;
-  font-size:14px;
-}
-
-.stats {
-  font-size:13px;
-  color:#aaa;
-}
-
-/* BUTTON */
-.btn {
-  display:block;
-  margin-top:10px;
-  background:#00ffd5;
-  padding:12px;
-  text-align:center;
-  border-radius:8px;
-  color:black;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* COMMENTS */
-.comments {
-  padding:15px;
-}
-
-.comment {
-  background:#1a1a1a;
-  margin:10px 0;
-  padding:10px;
-  border-radius:10px;
-  border-left:3px solid #00ffd5;
-}
-
-/* POPUP */
-.popup {
-  position:fixed;
-  bottom:20px;
-  left:20px;
-  background:#111;
-  padding:10px 15px;
-  border-radius:10px;
-  display:none;
-}
-</style>
-
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<div class="topbar">
-  <a href="https://t.me/kullaniciadiniz">📩 Telegram</a>
-  <a href="https://t.me/kanaliniz">📲 Kanal</a>
-</div>
+<header>
+    <h1 id="siteTitle">Yükleniyor...</h1>
+    <p id="siteDesc"></p>
+</header>
 
-<div class="live-box">
-  🔥 Şu anda <span id="liveCount"></span> kişi inceliyor
-</div>
+<main>
+    <section id="articles"></section>
+</main>
 
-<div class="container" id="siteList"></div>
 
-<div class="comments">
-  <h3>💬 Kullanıcı Yorumları</h3>
-  <div id="yorumlar"></div>
-</div>
-
-<div class="popup" id="popup"></div>
-
-<script>
-
-/* CANLI SAYI */
-function randomUser() {
-  let count = Math.floor(Math.random()*50)+120;
-  document.getElementById("liveCount").innerText = count;
-}
-randomUser();
-setInterval(randomUser,5000);
-
-/* SİTELER */
-fetch('sites.json')
-.then(res=>res.json())
-.then(data=>{
-  const container=document.getElementById("siteList");
-
-  data.forEach(site=>{
-    container.innerHTML += `
-    <div class="card">
-      <div class="badge">${site.etiket}</div>
-      <img src="${site.resim}">
-      <h3>${site.isim}</h3>
-      <div class="rating">⭐ ${site.puan}/5</div>
-      <p>${site.aciklama}</p>
-      <div class="stats">👁 ${Math.floor(Math.random()*500)+200} kişi baktı</div>
-      <a href="${site.link}" class="btn">HEMEN KATIL</a>
-    </div>
-    `;
-  });
-});
-
-/* YORUMLAR */
-const yorumlar=[
-"Ahmet: Çekim geldi 🔥",
-"Mehmet: Güzel site",
-"Ayşe: Deneme bonusu iyi",
-"Burak: Kazandım 👍",
-"Emre: Tavsiye ederim"
-];
-
-yorumlar.forEach(y=>{
-  document.getElementById("yorumlar").innerHTML += `<div class="comment">${y}</div>`;
-});
-
-/* POPUP */
-const isimler=["Ahmet","Mehmet","Ayşe","Fatma","Burak","Emre"];
-
-function popup(){
-  const p=document.getElementById("popup");
-  const isim=isimler[Math.floor(Math.random()*isimler.length)];
-
-  p.innerText=isim+" az önce katıldı ✔";
-  p.style.display="block";
-
-  setTimeout(()=>p.style.display="none",3000);
-}
-
-setInterval(popup,7000);
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
