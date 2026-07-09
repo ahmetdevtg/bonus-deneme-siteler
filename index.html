@@ -7,17 +7,21 @@
 
 <style>
 body {
+  margin:0;
+  font-family:Arial, sans-serif;
   background:#0b0b0b;
   color:white;
-  font-family:Arial;
-  margin:0;
 }
 
+/* TOPBAR */
 .topbar {
   display:flex;
   justify-content:space-between;
   padding:15px;
   background:#111;
+  position:sticky;
+  top:0;
+  z-index:999;
 }
 
 .topbar a {
@@ -26,17 +30,36 @@ body {
   border-radius:8px;
   color:white;
   text-decoration:none;
+  font-size:14px;
 }
 
+/* LIVE BOX */
+.live-box {
+  background: linear-gradient(90deg,#00ffd5,#00aaff);
+  padding:10px;
+  text-align:center;
+  font-weight:bold;
+  color:black;
+  border-radius:10px;
+  margin:10px;
+}
+
+/* CONTAINER */
 .container {
   padding:10px;
 }
 
+/* CARD */
 .card {
   background:#1a1a1a;
   margin:15px 0;
   padding:15px;
   border-radius:12px;
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:scale(1.02);
 }
 
 .card img {
@@ -44,16 +67,43 @@ body {
   border-radius:10px;
 }
 
+/* BUTTON */
 .btn {
   display:block;
   margin-top:10px;
   background:#00ffd5;
-  padding:10px;
+  padding:12px;
   text-align:center;
   border-radius:8px;
   color:black;
   text-decoration:none;
   font-weight:bold;
+}
+
+/* COMMENTS */
+.comments {
+  padding:15px;
+}
+
+.comment {
+  background:#1a1a1a;
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+  border-left:3px solid #00ffd5;
+}
+
+/* POPUP */
+.popup {
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:#111;
+  padding:10px 15px;
+  border-radius:10px;
+  font-size:14px;
+  box-shadow:0 0 10px rgba(0,0,0,0.5);
+  display:none;
 }
 </style>
 
@@ -61,14 +111,41 @@ body {
 
 <body>
 
+<!-- TOP -->
 <div class="topbar">
-  <a href="#">📩 İletişim</a>
+  <a href="#">📩 Telegram İletişim</a>
   <a href="#">📲 Kanalımız</a>
 </div>
 
+<!-- LIVE -->
+<div class="live-box">
+  🔥 Şu anda <span id="liveCount"></span> kişi inceliyor
+</div>
+
+<!-- SİTELER -->
 <div class="container" id="siteList"></div>
 
+<!-- YORUMLAR -->
+<div class="comments">
+  <h3>💬 Kullanıcı Yorumları</h3>
+  <div id="yorumlar"></div>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup"></div>
+
 <script>
+
+/* CANLI SAYI */
+function randomUser() {
+  let count = Math.floor(Math.random() * 50) + 120;
+  document.getElementById("liveCount").innerText = count;
+}
+randomUser();
+setInterval(randomUser, 5000);
+
+
+/* JSON SİTE ÇEK */
 fetch('sites.json')
 .then(res => res.json())
 .then(data => {
@@ -86,6 +163,43 @@ fetch('sites.json')
     container.innerHTML += card;
   });
 });
+
+
+/* YORUMLAR */
+const yorumlar = [
+  "Ahmet: Çekim sorunsuz geldi 🔥",
+  "Mehmet: Gerçekten kazandırdı 👍",
+  "Ayşe: Deneme bonusu iyiymiş",
+  "Burak: Başta inanmadım ama güzel",
+  "Emre: 2. yatırımda kazandım"
+];
+
+function yorumBas() {
+  const alan = document.getElementById("yorumlar");
+  yorumlar.forEach(y => {
+    alan.innerHTML += `<div class="comment">${y}</div>`;
+  });
+}
+yorumBas();
+
+
+/* POPUP (AZ ÖNCE KATILDI) */
+const isimler = ["Ahmet","Mehmet","Ayşe","Fatma","Burak","Emre","Can","Ece"];
+
+function popupGoster() {
+  const popup = document.getElementById("popup");
+  const isim = isimler[Math.floor(Math.random()*isimler.length)];
+
+  popup.innerText = isim + " az önce katıldı ✔";
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 3000);
+}
+
+setInterval(popupGoster, 7000);
+
 </script>
 
 </body>
