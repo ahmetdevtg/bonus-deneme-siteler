@@ -8,7 +8,7 @@
 <style>
 body {
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial;
   background:#0b0b0b;
   color:white;
 }
@@ -21,7 +21,6 @@ body {
   background:#111;
   position:sticky;
   top:0;
-  z-index:999;
 }
 
 .topbar a {
@@ -30,10 +29,9 @@ body {
   border-radius:8px;
   color:white;
   text-decoration:none;
-  font-size:14px;
 }
 
-/* LIVE BOX */
+/* LIVE */
 .live-box {
   background: linear-gradient(90deg,#00ffd5,#00aaff);
   padding:10px;
@@ -44,27 +42,49 @@ body {
   margin:10px;
 }
 
-/* CONTAINER */
+/* CARD */
 .container {
   padding:10px;
 }
 
-/* CARD */
 .card {
+  position:relative;
   background:#1a1a1a;
   margin:15px 0;
   padding:15px;
   border-radius:12px;
+  border:1px solid #222;
   transition:0.3s;
 }
 
 .card:hover {
   transform:scale(1.02);
+  box-shadow:0 0 15px #00ffd5;
 }
 
 .card img {
   width:100%;
   border-radius:10px;
+}
+
+.badge {
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#ff0055;
+  padding:5px 10px;
+  border-radius:8px;
+  font-size:12px;
+}
+
+.rating {
+  color:#ffd700;
+  font-size:14px;
+}
+
+.stats {
+  font-size:13px;
+  color:#aaa;
 }
 
 /* BUTTON */
@@ -101,8 +121,6 @@ body {
   background:#111;
   padding:10px 15px;
   border-radius:10px;
-  font-size:14px;
-  box-shadow:0 0 10px rgba(0,0,0,0.5);
   display:none;
 }
 </style>
@@ -111,94 +129,82 @@ body {
 
 <body>
 
-<!-- TOP -->
 <div class="topbar">
-  <a href="#">📩 Telegram İletişim</a>
-  <a href="#">📲 Kanalımız</a>
+  <a href="https://t.me/kullaniciadiniz">📩 Telegram</a>
+  <a href="https://t.me/kanaliniz">📲 Kanal</a>
 </div>
 
-<!-- LIVE -->
 <div class="live-box">
   🔥 Şu anda <span id="liveCount"></span> kişi inceliyor
 </div>
 
-<!-- SİTELER -->
 <div class="container" id="siteList"></div>
 
-<!-- YORUMLAR -->
 <div class="comments">
   <h3>💬 Kullanıcı Yorumları</h3>
   <div id="yorumlar"></div>
 </div>
 
-<!-- POPUP -->
 <div class="popup" id="popup"></div>
 
 <script>
 
 /* CANLI SAYI */
 function randomUser() {
-  let count = Math.floor(Math.random() * 50) + 120;
+  let count = Math.floor(Math.random()*50)+120;
   document.getElementById("liveCount").innerText = count;
 }
 randomUser();
-setInterval(randomUser, 5000);
+setInterval(randomUser,5000);
 
-
-/* JSON SİTE ÇEK */
+/* SİTELER */
 fetch('sites.json')
-.then(res => res.json())
-.then(data => {
-  const container = document.getElementById('siteList');
+.then(res=>res.json())
+.then(data=>{
+  const container=document.getElementById("siteList");
 
-  data.forEach(site => {
-    const card = `
-      <div class="card">
-        <img src="${site.resim}">
-        <h3>${site.isim}</h3>
-        <p>${site.aciklama}</p>
-        <a href="${site.link}" class="btn">HEMEN KATIL</a>
-      </div>
+  data.forEach(site=>{
+    container.innerHTML += `
+    <div class="card">
+      <div class="badge">${site.etiket}</div>
+      <img src="${site.resim}">
+      <h3>${site.isim}</h3>
+      <div class="rating">⭐ ${site.puan}/5</div>
+      <p>${site.aciklama}</p>
+      <div class="stats">👁 ${Math.floor(Math.random()*500)+200} kişi baktı</div>
+      <a href="${site.link}" class="btn">HEMEN KATIL</a>
+    </div>
     `;
-    container.innerHTML += card;
   });
 });
 
-
 /* YORUMLAR */
-const yorumlar = [
-  "Ahmet: Çekim sorunsuz geldi 🔥",
-  "Mehmet: Gerçekten kazandırdı 👍",
-  "Ayşe: Deneme bonusu iyiymiş",
-  "Burak: Başta inanmadım ama güzel",
-  "Emre: 2. yatırımda kazandım"
+const yorumlar=[
+"Ahmet: Çekim geldi 🔥",
+"Mehmet: Güzel site",
+"Ayşe: Deneme bonusu iyi",
+"Burak: Kazandım 👍",
+"Emre: Tavsiye ederim"
 ];
 
-function yorumBas() {
-  const alan = document.getElementById("yorumlar");
-  yorumlar.forEach(y => {
-    alan.innerHTML += `<div class="comment">${y}</div>`;
-  });
-}
-yorumBas();
+yorumlar.forEach(y=>{
+  document.getElementById("yorumlar").innerHTML += `<div class="comment">${y}</div>`;
+});
 
+/* POPUP */
+const isimler=["Ahmet","Mehmet","Ayşe","Fatma","Burak","Emre"];
 
-/* POPUP (AZ ÖNCE KATILDI) */
-const isimler = ["Ahmet","Mehmet","Ayşe","Fatma","Burak","Emre","Can","Ece"];
+function popup(){
+  const p=document.getElementById("popup");
+  const isim=isimler[Math.floor(Math.random()*isimler.length)];
 
-function popupGoster() {
-  const popup = document.getElementById("popup");
-  const isim = isimler[Math.floor(Math.random()*isimler.length)];
+  p.innerText=isim+" az önce katıldı ✔";
+  p.style.display="block";
 
-  popup.innerText = isim + " az önce katıldı ✔";
-  popup.style.display = "block";
-
-  setTimeout(() => {
-    popup.style.display = "none";
-  }, 3000);
+  setTimeout(()=>p.style.display="none",3000);
 }
 
-setInterval(popupGoster, 7000);
+setInterval(popup,7000);
 
 </script>
 
