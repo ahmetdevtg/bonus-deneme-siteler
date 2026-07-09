@@ -3,58 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bonus Siteler</title>
+<title>Güncel Bonus Siteleri</title>
 
 <style>
 body {
   margin:0;
+  background:#0b0b0b;
   font-family:Arial;
-  background:#0f0f0f;
   color:white;
-  text-align:center;
 }
 
 .header {
+  text-align:center;
   padding:20px;
-  font-size:24px;
+  font-size:22px;
   font-weight:bold;
 }
 
 .card {
-  background:#1c1c1c;
-  margin:20px;
-  padding:20px;
+  background:#161616;
+  margin:15px;
+  padding:15px;
   border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-a {
-  color:#00ffd5;
-  text-decoration:none;
+.left {
+  text-align:left;
+}
+
+.btn {
+  background:#00c896;
+  padding:10px 15px;
+  border-radius:8px;
+  color:black;
   font-weight:bold;
+  text-decoration:none;
+}
+
+.telegram {
+  background:#0088cc;
+  margin:20px;
+  padding:15px;
+  border-radius:10px;
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">🔥 BONUS SİTELER</div>
+<div class="header">🔥 GÜNCEL BONUS SİTELERİ</div>
 
 <div class="card">
-  <h2>🎁 Güncel Bonuslar</h2>
-  <p>En yeni fırsatları keşfet</p>
-  <a href="#">Git</a>
+  <div class="left">
+    <h3>Site 1</h3>
+    <p>300₺ Deneme Bonusu</p>
+  </div>
+  <a href="#" class="btn">KATIL</a>
 </div>
 
 <div class="card">
-  <h2>💎 Özel Listeler</h2>
-  <p>Seçilmiş içerikler</p>
-  <a href="#">Git</a>
+  <div class="left">
+    <h3>Site 2</h3>
+    <p>%100 İlk Yatırım Bonusu</p>
+  </div>
+  <a href="#" class="btn">KATIL</a>
 </div>
 
-<div class="card">
-  <h2>📲 Telegram</h2>
-  <p>Bizi takip et</p>
-  <a href="#">Katıl</a>
+<div class="telegram">
+  📲 Telegram Kanalımıza Katıl  
+  <br><br>
+  <a href="#" class="btn">GİRİŞ</a>
 </div>
 
 </body>
