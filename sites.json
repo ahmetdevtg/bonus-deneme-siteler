@@ -1,0 +1,14 @@
+[
+  {
+    "isim": "MatadorBet",
+    "aciklama": "300₺ Deneme Bonusu",
+    "link": "https://example.com",
+    "resim": "https://via.placeholder.com/300x150"
+  },
+  {
+    "isim": "Bets10",
+    "aciklama": "%100 Hoşgeldin Bonusu",
+    "link": "https://example.com",
+    "resim": "https://via.placeholder.com/300x150"
+  }
+]
