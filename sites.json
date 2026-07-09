@@ -3,12 +3,24 @@
     "isim": "MatadorBet",
     "aciklama": "300₺ Deneme Bonusu",
     "link": "https://example.com",
-    "resim": "https://via.placeholder.com/300x150"
+    "resim": "https://via.placeholder.com/600x300",
+    "etiket": "🔥 POPÜLER",
+    "puan": 4.9
   },
   {
     "isim": "Bets10",
     "aciklama": "%100 Hoşgeldin Bonusu",
     "link": "https://example.com",
-    "resim": "https://via.placeholder.com/300x150"
+    "resim": "https://via.placeholder.com/600x300",
+    "etiket": "⭐ YENİ",
+    "puan": 4.7
+  },
+  {
+    "isim": "BetTilt",
+    "aciklama": "500₺ Deneme + Freespin",
+    "link": "https://example.com",
+    "resim": "https://via.placeholder.com/600x300",
+    "etiket": "💎 ÖNERİLEN",
+    "puan": 4.8
   }
 ]
