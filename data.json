@@ -8,19 +8,13 @@
       "title": "Online Platformlar Hakkında Bilmeniz Gerekenler",
       "slug": "online-platformlar",
       "description": "Online dünyadaki yeni gelişmeler ve kullanıcı rehberleri.",
-      "content": "Bu içerikte online platformlar hakkında genel bilgiler ve dikkat edilmesi gereken noktalar anlatılmaktadır."
+      "content": "Bu içerikte online platformlar hakkında detaylı bilgiler yer almaktadır."
     },
     {
       "title": "Dijital Dünyada Güvenli Kullanım Rehberi",
       "slug": "dijital-guvenlik",
       "description": "İnterneti daha güvenli kullanmak için temel bilgiler.",
-      "content": "Dijital güvenlik günümüzde oldukça önemlidir. Kullanıcıların dikkat etmesi gereken noktalar vardır."
-    },
-    {
-      "title": "Yeni Teknolojiler ve İnternet Trendleri",
-      "slug": "teknoloji-trendleri",
-      "description": "Teknoloji alanındaki yeni gelişmeler ve trendler.",
-      "content": "Teknoloji her geçen gün gelişiyor ve internet kullanım alışkanlıklarını değiştiriyor."
+      "content": "Dijital güvenlik için güçlü şifreler ve dikkatli kullanım şarttır."
     }
   ]
 }
