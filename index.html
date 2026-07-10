@@ -93,12 +93,37 @@ fetch("data.json")
         if(article){
             document.title = article.title;
 
-            area.innerHTML = `
-                <article>
-                    <h1>${article.title}</h1>
-                    <p>${article.content}</p>
-                </article>
-            `;
+ fetch("sites.json")
+.then(r => r.json())
+.then(sitesData => {
+
+    let randomSites = sitesData.sites
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 2);
+
+    let sitesHTML = "";
+
+    randomSites.forEach(site => {
+        sitesHTML += `
+        <div style="margin-top:15px;padding:10px;background:#0f172a;border-radius:8px;">
+            <strong>${site.name}</strong>
+            <p>${site.description}</p>
+            <a href="${site.url}" target="_blank">Hemen Giriş Yap</a>
+        </div>
+        `;
+    });
+
+    area.innerHTML = `
+        <article>
+            <h1>${article.title}</h1>
+            <p>${article.content}</p>
+
+            <h3>Önerilen Platformlar</h3>
+            ${sitesHTML}
+        </article>
+    `;
+
+});
         } else {
             area.innerHTML = "<p>İçerik bulunamadı.</p>";
         }
