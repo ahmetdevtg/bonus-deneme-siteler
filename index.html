@@ -16,13 +16,9 @@ body {
 }
 
 header {
-    padding: 20px;
+    padding: 25px;
     text-align: center;
     background: #1e293b;
-}
-
-h1 {
-    margin: 0;
 }
 
 main {
@@ -44,6 +40,10 @@ a {
     color: #38bdf8;
     text-decoration: none;
 }
+
+h2 {
+    margin-top: 40px;
+}
 </style>
 
 </head>
@@ -55,33 +55,89 @@ a {
     <p id="siteDesc"></p>
 </header>
 
-<main id="articles"></main>
+<main>
+
+<div id="content"></div>
+
+<h2>Önerilen Siteler</h2>
+<div id="sites"></div>
+
+</main>
 
 <script>
+
+// URL'den page al
+const params = new URLSearchParams(window.location.search);
+const page = params.get("page");
+
+
+// DATA.JSON
 fetch("data.json")
 .then(res => res.json())
 .then(data => {
 
     document.title = data.site.title;
+
     document.querySelector("meta[name='description']")
     .setAttribute("content", data.site.description);
 
     document.getElementById("siteTitle").innerText = data.site.title;
     document.getElementById("siteDesc").innerText = data.site.description;
 
-    let area = document.getElementById("articles");
+    let area = document.getElementById("content");
 
-    data.articles.forEach(a => {
+    // TEKİL SAYFA
+    if(page){
+        let article = data.articles.find(a => a.slug === page);
+
+        if(article){
+            document.title = article.title;
+
+            area.innerHTML = `
+                <article>
+                    <h1>${article.title}</h1>
+                    <p>${article.content}</p>
+                </article>
+            `;
+        } else {
+            area.innerHTML = "<p>İçerik bulunamadı.</p>";
+        }
+
+    } else {
+        // ANA SAYFA
+        data.articles.forEach(a => {
+            area.innerHTML += `
+            <article>
+                <h2>${a.title}</h2>
+                <p>${a.description}</p>
+                <a href="?page=${a.slug}">Devamını Oku</a>
+            </article>
+            `;
+        });
+    }
+
+});
+
+
+// SİTELER
+fetch("sites.json")
+.then(res => res.json())
+.then(data => {
+
+    let area = document.getElementById("sites");
+
+    data.sites.forEach(site => {
         area.innerHTML += `
         <article>
-            <h2>${a.title}</h2>
-            <p>${a.description}</p>
-            <a href="?page=${a.slug}">Devamını Oku</a>
+            <h3>${site.name}</h3>
+            <p>${site.description}</p>
+            <a href="${site.url}" target="_blank">Siteye Git</a>
         </article>
         `;
     });
 
 });
+
 </script>
 
 </body>
