@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bonus-deneme-siteler.yrdahmets.workers.dev/sitemap.xml
