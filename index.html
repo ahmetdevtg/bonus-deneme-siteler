@@ -7,7 +7,45 @@
 <title>Yükleniyor...</title>
 <meta name="description" content="">
 
-<link rel="stylesheet" href="style.css">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #0f172a;
+    color: white;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+    background: #1e293b;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+article {
+    background: #1e293b;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    color: #38bdf8;
+    text-decoration: none;
+}
+</style>
+
 </head>
 
 <body>
@@ -17,12 +55,34 @@
     <p id="siteDesc"></p>
 </header>
 
-<main>
-    <section id="articles"></section>
-</main>
+<main id="articles"></main>
 
+<script>
+fetch("data.json")
+.then(res => res.json())
+.then(data => {
 
-<script src="script.js"></script>
+    document.title = data.site.title;
+    document.querySelector("meta[name='description']")
+    .setAttribute("content", data.site.description);
+
+    document.getElementById("siteTitle").innerText = data.site.title;
+    document.getElementById("siteDesc").innerText = data.site.description;
+
+    let area = document.getElementById("articles");
+
+    data.articles.forEach(a => {
+        area.innerHTML += `
+        <article>
+            <h2>${a.title}</h2>
+            <p>${a.description}</p>
+            <a href="?page=${a.slug}">Devamını Oku</a>
+        </article>
+        `;
+    });
+
+});
+</script>
 
 </body>
 </html>
